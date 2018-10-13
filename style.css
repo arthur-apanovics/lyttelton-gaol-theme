@@ -1,0 +1,101 @@
+/*
+ Theme Name:   Lyttelton Gaol Child
+ Theme URI:    http://example.com/twenty-fifteen-child/
+ Description:  Child theme for Lyttelton Gaol data
+ Author:       likeminded.co.nz
+ Author URI:   likeminded.co.nz
+ Template:     twentysixteen
+ Version:      1.0.0
+ License:      GNU General Public License v2 or later
+ License URI:  http://www.gnu.org/licenses/gpl-2.0.html
+*/
+
+div#gaol-search {
+    /*min-width: 320px;*/
+    /*max-width: 800px;*/
+    /*padding: 50px;*/
+    /*margin: 0 auto;*/
+    /*background: #fff;*/
+}
+
+section.gaol-search-section {
+    display: none;
+    padding: 20px 0 0;
+    border-top: 1px solid #ddd;
+}
+
+input.gaol-search-tab {
+    display: none;
+}
+
+label.gaol-search-tab-label {
+    display: inline-block;
+    margin: 0 0 -1px;
+    padding: 15px 25px;
+    font-weight: 600;
+    text-align: center;
+    color: #bbb;
+    border: 1px solid transparent;
+}
+
+ label.gaol-search-tab-label:before {
+    font-family: fontawesome;
+    font-weight: normal;
+    margin-right: 10px;
+}
+
+ label.gaol-search-tab-label[for='tab-find-person']:before {
+     content: '\f2bb';
+ }
+ label.gaol-search-tab-label[for='tab-find-by-keyword']:before {
+     content: '\f002';
+ }
+
+ label.gaol-search-tab-label:hover {
+    color: #888;
+    cursor: pointer;
+}
+
+ input.gaol-search-tab:checked + label.gaol-search-tab-label {
+    color: #555;
+    border: 1px solid #ddd;
+    border-top: 2px solid orange;
+    border-bottom: 1px solid #fff;
+}
+
+#tab-find-person:checked ~ #find-person,
+#tab-find-by-keyword:checked ~ #find-by-keyword {
+    display: block;
+}
+
+@media screen and (max-width: 650px) {
+     label.gaol-search-tab-label {
+        font-size: 0;
+    }
+     label.gaol-search-tab-label:before {
+        margin: 0;
+        font-size: 18px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+     label.gaol-search-tab-label {
+        padding: 15px;
+    }
+}
+
+/* CONVICT PROFILE */
+
+body.single-convict article .entry-content  {
+    width: 100% !important;
+}
+li>div.key{
+    float: left;
+}
+li>div.value{
+    float: right;
+    font-weight: 500;
+}
+.profile-container {
+    margin-top: 2em;
+}
