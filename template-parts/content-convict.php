@@ -1,4 +1,6 @@
 <?php
+use lyttelton_gaol\fields;
+
 /**
  * The template part for displaying single posts
  *
@@ -57,15 +59,15 @@ function get_formatted_entry($key , $value, $extra_class = null){
 				<?php
 				// INFO
 				$output = start_container('Biographical');
-				$output .= get_formatted_entry('Name', $meta_values['bio_name']);
-				$output .= get_formatted_entry('Surname', $meta_values['bio_surname']);
-				$output .= get_formatted_entry('Christian Name', $meta_values['bio_christian_name']);
-				$output .= get_formatted_entry('Middle Name', $meta_values['bio_middle_name']);
-				$output .= get_formatted_entry('Alias', $meta_values['bio_alias']);
-				$output .= get_formatted_entry('Born', $meta_values['bio_born']);
-				$output .= get_formatted_entry('Country of Birth', $meta_values['bio_country_of_birth']);
-				$output .= get_formatted_entry('Native of', $meta_values['bio_native_of']);
-				$output .= get_formatted_entry('Occupation', $meta_values['bio_trade']);
+				$output .= get_formatted_entry('Name',             $meta_values[fields\bio::NAME['id']]);
+				$output .= get_formatted_entry('Surname',          $meta_values[fields\bio::SURNAME['id']]);
+				$output .= get_formatted_entry('Christian Name',   $meta_values[fields\bio::CHRISTIAN_NAME['id']]);
+				$output .= get_formatted_entry('Middle Name',      $meta_values[fields\bio::MIDDLE_NAME['id']]);
+				$output .= get_formatted_entry('Alias',            $meta_values[fields\bio::ALIAS['id']]);
+				$output .= get_formatted_entry('Born',             $meta_values[fields\bio::BORN['id']]);
+				$output .= get_formatted_entry('Country of Birth', $meta_values[fields\bio::COUNTRY_OF_BIRTH['id']]);
+				$output .= get_formatted_entry('Native of',        $meta_values[fields\bio::NATIVE_OF['id']]);
+				$output .= get_formatted_entry('Occupation',       $meta_values[fields\bio::TRADE['id']]);
 				$output .= close_container();
 				echo $output;
 				?>
@@ -74,16 +76,16 @@ function get_formatted_entry($key , $value, $extra_class = null){
 				<?php
 				// BIO
 				$output = start_container('Physical');
-				$output .= get_formatted_entry('Complexion', $meta_values['bio_complexion']);
-				$output .= get_formatted_entry('Height', $meta_values['bio_height']);
-				$output .= get_formatted_entry('Hair', $meta_values['bio_hair']);
-				$output .= get_formatted_entry('Eyes', $meta_values['bio_eyes']);
-				$output .= get_formatted_entry('Nose', $meta_values['bio_nose']);
-				$output .= get_formatted_entry('Chin', $meta_values['bio_chin']);
-				$output .= get_formatted_entry('Mouth', $meta_values['bio_mouth']);
-				$output .= get_formatted_entry('Previous Convictions', $meta_values['bio_previous_convictions']);
-				$output .= get_formatted_entry('Photographed', $meta_values['bio_photographed']);
-				$output .= get_formatted_entry('Remarks', $meta_values['bio_remarks']);
+				$output .= get_formatted_entry('Complexion',           $meta_values[fields\bio::COMPLEXION['id']]);
+				$output .= get_formatted_entry('Height',               $meta_values[fields\bio::HEIGHT['id']]);
+				$output .= get_formatted_entry('Hair',                 $meta_values[fields\bio::HAIR['id']]);
+				$output .= get_formatted_entry('Eyes',                 $meta_values[fields\bio::EYES['id']]);
+				$output .= get_formatted_entry('Nose',                 $meta_values[fields\bio::NOSE['id']]);
+				$output .= get_formatted_entry('Chin',                 $meta_values[fields\bio::CHIN['id']]);
+				$output .= get_formatted_entry('Mouth',                $meta_values[fields\bio::MOUTH['id']]);
+				$output .= get_formatted_entry('Previous Convictions', $meta_values[fields\bio::PREVIOUS_CONVICTIONS['id']]);
+				$output .= get_formatted_entry('Photographed',         $meta_values[fields\bio::PHOTOGRAPHED['id']]);
+				$output .= get_formatted_entry('Remarks',              $meta_values[fields\bio::REMARKS['id']]);
 				$output .= close_container();
 				echo $output;
 				?>
@@ -96,14 +98,15 @@ function get_formatted_entry($key , $value, $extra_class = null){
 			// CONVICTIONS
 			foreach (unserialize($meta_values['convictions']) as $conviction) {
 				$output = start_container(null, 'conviction');
-				$output .= get_formatted_entry('Offence', $conviction['offence'], 'list-group-item-danger');
-				$output .= get_formatted_entry('Sentence', $conviction['sentence'], 'list-group-item-warning');
-				$output .= get_formatted_entry('Date Tried', $conviction['date_tried']);
-				$output .= get_formatted_entry('Discharged', $conviction['discharged']);
-				$output .= get_formatted_entry('Source', $conviction['gazette_source']);
-				$output .= get_formatted_entry('Publication Year', $conviction['gazette_publication_year']);
-				$output .= get_formatted_entry('Volume', $conviction['gazette_volume']);
-				$output .= get_formatted_entry('Page', $conviction['gazette_page']);
+				$output .= get_formatted_entry('Offence',          $conviction[fields\conviction::OFFENCE['id']], 'list-group-item-danger');
+				$output .= get_formatted_entry('Sentence',         $conviction[fields\conviction::SENTENCE['id']], 'list-group-item-warning');
+				$output .= get_formatted_entry('Date Tried',       $conviction[fields\conviction::DATE_TRIED['id']]);
+				$output .= get_formatted_entry('Discharged',       $conviction[fields\conviction::DISCHARGED['id']]);
+
+				$output .= get_formatted_entry('Source',           $conviction[fields\gazette::SOURCE['id']]);
+				$output .= get_formatted_entry('Publication Year', $conviction[fields\gazette::PUBLICATION_YEAR['id']]);
+				$output .= get_formatted_entry('Volume',           $conviction[fields\gazette::VOLUME['id']]);
+				$output .= get_formatted_entry('Page',             $conviction[fields\gazette::PAGE['id']]);
 				$output .= close_container();
 				echo $output;
 			}

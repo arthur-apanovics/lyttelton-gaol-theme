@@ -2,6 +2,8 @@
 /*
 Template Name: Gaol Search/Browse Page
 */
+use lyttelton_gaol\fields;
+
 //Font awesome
 wp_enqueue_style('font-awesome', 'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
 
@@ -36,29 +38,29 @@ get_header(); ?>
             <label for="tab-find-by-keyword" class="gaol-search-tab-label">Search by keyword</label>
 
             <section id="find-person" class="gaol-search-section">
-                <form role="search" method="get" class="search-form" action="<?php echo home_url( '/browse' ); ?>">
+                <form role="search" method="get" class="search-form" action="<?php echo home_url( '/' ); ?>">
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <!--first name-->
                             <label for="firstName">First Name</label>
-                            <input type="text" class="form-control" id="firstName" placeholder="Marry">
+                            <input type="text" class="form-control" id="firstName" name="<?php echo fields\bio::NAME ?>" placeholder="Marry">
                         </div>
                         <!--last name-->
                         <div class="form-group col-md-6">
                             <label for="lastName">Last Name</label>
-                            <input type="text" class="form-control" id="lastName" placeholder="Ann">
+                            <input type="text" class="form-control" id="lastName" name="<?php echo fields\bio::SURNAME ?>" placeholder="Ann">
                         </div>
                     </div>
                     <div class="form-row">
                         <!--country-->
                         <div class="form-group col-md-8">
                             <label for="countryOfBirth">Country of birth</label>
-                            <input type="text" class="form-control" id="countryOfBirth" placeholder="England">
+                            <input type="text" class="form-control" id="countryOfBirth" name="<?php echo fields\bio::COUNTRY_OF_BIRTH ?>" placeholder="England">
                         </div>
                         <!--trade-->
                         <div class="form-group col-md-4">
                             <label for="trade">Trade</label>
-                            <select id="trade" class="form-control" name="trade">
+                            <select id="trade" class="form-control" name="<?php echo fields\bio::TRADE ?>">
                                 <option disabled selected value="">Select...</option>
 	                            <?php
                                     foreach (get_all_meta_values('bio_trade', true) as $trade){
@@ -69,7 +71,6 @@ get_header(); ?>
                         </div>
                     </div>
                     <input type="hidden" name="post_type" value="convict" />
-                    <input type="hidden" name="s" value="test" />
                     <button type="submit" class="btn btn-primary">Search</button>
                 </form>
             </section>
@@ -83,13 +84,6 @@ get_header(); ?>
                     belly ball tip short ribs biltong meatball chuck. Pork chop ribeye tail short ribs, beef
                     hamburger meatball kielbasa rump corned beef porchetta landjaeger flank. Doner rump frankfurter
                     meatball meatloaf, cow kevin pork pork loin venison fatback spare ribs salami beef ribs.
-                </p>
-                <p>
-                    Jerky jowl pork chop tongue, kielbasa shank venison. Capicola shank pig ribeye leberkas filet
-                    mignon brisket beef kevin tenderloin porchetta. Capicola fatback venison shank kielbasa,
-                    drumstick ribeye landjaeger beef kevin tail meatball pastrami prosciutto pancetta. Tail kevin
-                    spare ribs ground round ham ham hock brisket shoulder. Corned beef tri-tip leberkas flank
-                    sausage ham hock filet mignon beef ribs pancetta turkey.
                 </p>
             </section>
         </div>
