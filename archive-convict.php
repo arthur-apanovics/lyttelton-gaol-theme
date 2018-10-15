@@ -15,6 +15,10 @@
  * @subpackage Twenty_Sixteen
  * @since Twenty Sixteen 1.0
  */
+//convict table
+use lyttelton_gaol\fields\bio;
+
+wp_enqueue_script( 'convict-table', get_stylesheet_directory_uri() . '/js/con_table.js', array('jquery'));
 
 get_header(); ?>
 
@@ -31,19 +35,56 @@ get_header(); ?>
 			</header><!-- .page-header -->
 
 			<?php
-			// Start the Loop.
+
+			$bio_fields = new lyttelton_gaol\fields\bio();
+			$con_fields = new lyttelton_gaol\fields\conviction();
+			$gaz_fields = new lyttelton_gaol\fields\gazette();
+			$all_fields = $bio_fields->getConstants() + $con_fields->getConstants() + $gaz_fields->getConstants();
+
+            $all_meta = [];
+            // Start the Loop.
 			while ( have_posts() ) : the_post();
 
-				/*
-				 * Include the Post-Format-specific template for the content.
-				 * If you want to override this in a child theme, then include a file
-				 * called content-___.php (where ___ is the Post Format name) and that will be used instead.
-				 */
-				get_template_part( 'template-parts/content', 'convict-entry' );
+//				get_template_part( 'template-parts/content', 'convict-entry' );
+
+                $entry = [];
+                foreach (get_post_meta($post->ID) as $key => $value)
+                {
+                    $entry[$key] = $value[0];
+                }
+                $entry['convictions'] = unserialize($entry['convictions']);
+                $entry['post_data'] = $post;
+
+                $all_meta[] = $entry;
 
 			// End the loop.
 			endwhile;
+        ?>
 
+            <table id="table">
+                <thead>
+                <tr>
+                    <?php
+                        $ths = '';
+                        $ths .= get_th(bio::NAME);
+                        $ths .= get_th(bio::SURNAME);
+                        $ths .= get_th(bio::COUNTRY_OF_BIRTH);
+                        $ths .= get_th(bio::TRADE);
+                        echo $ths;
+                    ?>
+                </tr>
+                </thead>
+            </table>
+
+            <script>
+                window.all_posts = <?php echo json_encode($all_meta) ?>;
+
+                init_convict_table(window.all_posts);
+
+                console.log('Right hea!');
+            </script>
+
+			<?php
 			// Previous/next page navigation.
 			the_posts_pagination( array(
 				'prev_text'          => __( 'Previous page', 'twentysixteen' ),
@@ -63,3 +104,6 @@ get_header(); ?>
 
 <?php get_sidebar(); ?>
 <?php get_footer(); ?>
+<?php function get_th($field){
+    return '<th data-sortable="true" data-field="' . $field['id'] . '">' . $field['desc'] . '</th>';
+} ?>
