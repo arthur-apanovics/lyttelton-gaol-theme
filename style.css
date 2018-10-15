@@ -47,7 +47,7 @@ label.gaol-search-tab-label {
  label.gaol-search-tab-label[for='tab-find-person']:before {
      content: '\f2bb';
  }
- label.gaol-search-tab-label[for='tab-find-by-keyword']:before {
+ label.gaol-search-tab-label[for='tab-find-by-conviction']:before {
      content: '\f002';
  }
 
@@ -64,7 +64,7 @@ label.gaol-search-tab-label {
 }
 
 #tab-find-person:checked ~ #find-person,
-#tab-find-by-keyword:checked ~ #find-by-keyword {
+#tab-find-by-conviction:checked ~ #find-by-keyword {
     display: block;
 }
 

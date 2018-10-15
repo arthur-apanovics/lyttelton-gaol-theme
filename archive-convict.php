@@ -53,6 +53,7 @@ get_header(); ?>
                     $entry[$key] = $value[0];
                 }
                 $entry['convictions'] = unserialize($entry['convictions']);
+                $entry['total_convictions'] = count($entry['convictions']);
                 $entry['post_data'] = $post;
 
                 $all_meta[] = $entry;
@@ -70,6 +71,7 @@ get_header(); ?>
                         $ths .= get_th(bio::SURNAME);
                         $ths .= get_th(bio::COUNTRY_OF_BIRTH);
                         $ths .= get_th(bio::TRADE);
+                        $ths .= '<th data-sortable="true" data-width="80px" data-field="total_convictions">Total</th>';
                         echo $ths;
                     ?>
                 </tr>

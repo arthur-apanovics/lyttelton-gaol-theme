@@ -17,6 +17,27 @@ $.makeTable = function (mydata) {
     return ($(table));
 };
 
+$.makeConTable = function (convictions) {
+    var table = $('<table border=1>');
+    var tblHeader = "<tr>";
+
+    tblHeader += "<th>Offence</th>";
+    tblHeader += "<th>Sentence</th>";
+
+    tblHeader += "</tr>";
+    $(tblHeader).appendTo(table);
+
+    $.each(convictions, function (index, conviction) {
+        var tableRow = "<tr>";
+        tableRow += "<td>" + conviction.offence + "</td>";
+        tableRow += "<td>" + conviction.sentence+ "</td>";
+        tableRow += "</tr>";
+        $(table).append(tableRow);
+    });
+
+    return ($(table));
+};
+
 function init_convict_table(data) {
     $('#table').bootstrapTable({
         undefinedText: 'No value',
@@ -40,7 +61,7 @@ function init_convict_table(data) {
 
 
 
-            $detail.html($.makeTable(row.convictions));
+            $detail.html($.makeConTable(row.convictions));
         }
     });
 }
