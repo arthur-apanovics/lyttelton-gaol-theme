@@ -18,12 +18,12 @@ $.makeTable = function (mydata) {
 };
 
 $.makeConTable = function (convictions) {
-    var table = $('<table border=1>');
+    var table = $('<table>');
     var tblHeader = "<tr>";
 
     tblHeader += '<th>Offence</th>';
     tblHeader += '<th>Sentence</th>';
-    tblHeader += '<th>Year</th>';
+    tblHeader += '<th style="width: 80px;">Year</th>'; // TODO to CSS
 
     tblHeader += "</tr>";
     $(tblHeader).appendTo(table);
@@ -42,6 +42,7 @@ $.makeConTable = function (convictions) {
 
 function init_convict_table(data) {
     $('#table').bootstrapTable({
+        classes: 'table table-no-bordered',
         undefinedText: 'No value',
         data: data,
         pagination: true,
@@ -53,8 +54,17 @@ function init_convict_table(data) {
         showColumns: true,
         showPaginationSwitch: true,
         detailView: true,
+        // EVENTS
         onExpandRow: function (index, row, $detail) {
-            $detail.html($.makeConTable(row.convictions));
+            var dTable = $.makeConTable(row.convictions);
+            $detail.html(dTable);
+        },
+        onClickRow: function (row, $element, field) {
+            console.log('');
         }
     });
+}
+
+function full_name_formatter(value, row, index) {
+    return '<a href="'+ row.post_data.guid +'">'+ row.bio_name + ' ' + row.bio_surname +'</a>';
 }

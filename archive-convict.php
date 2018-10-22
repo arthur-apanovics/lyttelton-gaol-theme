@@ -51,8 +51,9 @@ get_header(); ?>
                 {
                     $entry[$key] = $value[0];
                 }
-                $entry['convictions'] = unserialize($entry['convictions']);
-                $entry['total_convictions'] = count($entry['convictions']);
+//				$entry['full_name'] = $entry[bio::NAME['id']] . ' ' . $entry[bio::SURNAME['id']];
+				$entry['convictions'] = unserialize($entry['convictions']);
+				$entry['total_convictions'] = count($entry['convictions']);
                 $entry['post_data'] = $post;
 
                 $all_meta[] = $entry;
@@ -65,13 +66,18 @@ get_header(); ?>
                 <thead>
                 <tr>
                     <?php
-                        $ths = '';
-                        $ths .= get_th(bio::NAME);
-                        $ths .= get_th(bio::SURNAME);
-                        $ths .= get_th(bio::COUNTRY_OF_BIRTH);
-                        $ths .= get_th(bio::TRADE);
-                        $ths .= '<th data-sortable="true" data-width="80px" data-field="total_convictions">Total</th>';
-                        echo $ths;
+                    $ths = '';
+                    $ths .= '<th data-formatter="full_name_formatter">Name</th>';
+                    $ths .= get_th(bio::ALIAS, 'data-visible="false"');
+                    $ths .= get_th(bio::CHRISTIAN_NAME, 'data-visible="false"');
+                    $ths .= get_th(bio::MIDDLE_NAME, 'data-visible="false"');
+                    $ths .= get_th(bio::BORN, 'data-visible="false"');
+                    $ths .= get_th(bio::COUNTRY_OF_BIRTH);
+                    $ths .= get_th(bio::NATIVE_OF, 'data-visible="false"');
+                    $ths .= get_th(bio::TRADE);
+                    $ths .= get_th(bio::REMARKS, 'data-visible="false"');
+                    $ths .= '<th data-sortable="true" data-width="80px" data-align="right" data-field="total_convictions">Total</th>';
+                    echo $ths;
                     ?>
                 </tr>
                 </thead>
@@ -101,6 +107,6 @@ get_header(); ?>
 
 <?php get_sidebar(); ?>
 <?php get_footer(); ?>
-<?php function get_th($field){
-    return '<th data-sortable="true" data-field="' . $field['id'] . '">' . $field['desc'] . '</th>';
+<?php function get_th($field, $attributes = null){
+    return '<th data-sortable="true" data-field="' . $field['id'] . '" ' . $attributes . '>' . $field['desc'] . '</th>';
 } ?>
