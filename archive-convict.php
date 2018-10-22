@@ -36,6 +36,8 @@ get_header(); ?>
 
 			<?php
 
+			$search_by = get_query_var('search_by');
+
 			$bio_fields = new lyttelton_gaol\fields\bio();
 			$con_fields = new lyttelton_gaol\fields\conviction();
 			$gaz_fields = new lyttelton_gaol\fields\gazette();
@@ -44,9 +46,6 @@ get_header(); ?>
             $all_meta = [];
             // Start the Loop.
 			while ( have_posts() ) : the_post();
-
-//				get_template_part( 'template-parts/content', 'convict-entry' );
-
                 $entry = [];
                 foreach (get_post_meta($post->ID) as $key => $value)
                 {
@@ -79,11 +78,7 @@ get_header(); ?>
             </table>
 
             <script>
-                window.all_posts = <?php echo json_encode($all_meta) ?>;
-
-                init_convict_table(window.all_posts);
-
-                console.log('Right hea!');
+                init_convict_table(<?php echo json_encode($all_meta) ?>);
             </script>
 
 			<?php

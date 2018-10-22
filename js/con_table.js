@@ -21,16 +21,18 @@ $.makeConTable = function (convictions) {
     var table = $('<table border=1>');
     var tblHeader = "<tr>";
 
-    tblHeader += "<th>Offence</th>";
-    tblHeader += "<th>Sentence</th>";
+    tblHeader += '<th>Offence</th>';
+    tblHeader += '<th>Sentence</th>';
+    tblHeader += '<th>Year</th>';
 
     tblHeader += "</tr>";
     $(tblHeader).appendTo(table);
 
     $.each(convictions, function (index, conviction) {
         var tableRow = "<tr>";
-        tableRow += "<td>" + conviction.offence + "</td>";
-        tableRow += "<td>" + conviction.sentence+ "</td>";
+        tableRow += "<td>" + conviction.offence_crime + "</td>";
+        tableRow += "<td>" + conviction.offence_sentence+ "</td>";
+        tableRow += "<td>" + conviction.gazette_publication_year+ "</td>";
         tableRow += "</tr>";
         $(table).append(tableRow);
     });
@@ -45,22 +47,13 @@ function init_convict_table(data) {
         pagination: true,
         pageSize: 25,
         search: true,
-        striped: true,
+        // striped: true,
         showToggle: true,
         smartDisplay: true,
         showColumns: true,
         showPaginationSwitch: true,
         detailView: true,
         onExpandRow: function (index, row, $detail) {
-            // collapse others
-            // $('#table').find('.detail-view').each(function () {
-            //     if (!$(this).is($detail.parent())) {
-            //         $(this).prev().find('.detail-icon').click()
-            //     }
-            // });
-
-
-
             $detail.html($.makeConTable(row.convictions));
         }
     });

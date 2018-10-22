@@ -18,19 +18,6 @@ function lyttelton_gaol_enqueue_js() {
 }
 add_action( 'wp_enqueue_scripts', 'lyttelton_gaol_enqueue_js');
 
-function search_filter($query) {
-	if ($query->is_search && !is_admin() ) {
-		if(isset($_GET['post_type'])) {
-			$type = $_GET['post_type'];
-			if($type == 'book') {
-				$query->set('post_type',array('book'));
-			}
-		}
-	}
-	return $query;
-}
-add_filter('pre_get_posts','search_filter');
-
 function get_all_meta_values( $key = '', $distinct = false, $type = 'convict', $status = 'publish' ) {
 	global $wpdb;
 

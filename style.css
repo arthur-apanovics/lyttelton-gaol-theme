@@ -16,6 +16,7 @@ div#gaol-search {
     /*padding: 50px;*/
     /*margin: 0 auto;*/
     /*background: #fff;*/
+    margin-bottom: 3em;
 }
 
 section.gaol-search-section {
@@ -64,7 +65,7 @@ label.gaol-search-tab-label {
 }
 
 #tab-find-person:checked ~ #find-person,
-#tab-find-by-conviction:checked ~ #find-by-keyword {
+#tab-find-by-conviction:checked ~ #find-by-offence {
     display: block;
 }
 
