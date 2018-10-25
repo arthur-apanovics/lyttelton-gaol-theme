@@ -1,57 +1,55 @@
 <?php
 /**
- * The template for displaying archive pages
- *
- * Used to display archive-type pages if nothing more specific matches a query.
- * For example, puts together date-based pages if no date.php file exists.
- *
- * If you'd like to further customize these archive views, you may create a
- * new template file for each one. For example, tag.php (Tag archives),
- * category.php (Category archives), author.php (Author archives), etc.
+ * The template for displaying archive pages.
  *
  * @link https://codex.wordpress.org/Template_Hierarchy
  *
- * @package WordPress
- * @subpackage Twenty_Sixteen
- * @since Twenty Sixteen 1.0
+ * @package Shoreditch
  */
-//convict table
+
 use lyttelton_gaol\fields\bio;
 
 wp_enqueue_script( 'convict-table', get_stylesheet_directory_uri() . '/js/con_table.js', array('jquery'));
 
-get_header(); ?>
+get_header();
 
-	<div id="primary" class="content-area">
-		<main id="main" class="site-main" role="main">
+$search_by = get_query_var('search_by');
+?>
 
-		<?php if ( have_posts() ) : ?>
+<div class="site-content-wrapper">
 
-			<header class="page-header">
-				<?php
-					the_archive_title( '<h1 class="page-title">', '</h1>' );
-					the_archive_description( '<div class="taxonomy-description">', '</div>' );
-				?>
-			</header><!-- .page-header -->
+    <div id="primary" class="content-area">
+        <main id="main" class="site-main" role="main">
 
 			<?php
+			if ( have_posts() ) : ?>
 
-			$search_by = get_query_var('search_by');
+                <header class="archive-header">
+                    <h1 class="page-title">
+                        <?php echo !empty($search_by) ? 'Search Results' : 'All convicts'; ?>
+                    </h1>
+                    <div class="taxonomy-description">
+                        Use the toolbar to further refine your search.
+                        <br>
+                        Expand row to see convictions.
+                    </div>
+                </header><!-- .page-header -->
 
+			<?php
 			$bio_fields = new lyttelton_gaol\fields\bio();
 			$con_fields = new lyttelton_gaol\fields\conviction();
 			$gaz_fields = new lyttelton_gaol\fields\gazette();
 			$all_fields = $bio_fields->getConstants() + $con_fields->getConstants() + $gaz_fields->getConstants();
 
             $all_meta = [];
+
             // Start the Loop.
 			while ( have_posts() ) : the_post();
                 $entry = [];
+
                 foreach (get_post_meta($post->ID) as $key => $value)
-                {
                     $entry[$key] = $value[0];
-                }
-//				$entry['full_name'] = $entry[bio::NAME['id']] . ' ' . $entry[bio::SURNAME['id']];
+
 				$entry['convictions'] = unserialize($entry['convictions']);
 				$entry['total_convictions'] = count($entry['convictions']);
                 $entry['post_data'] = $post;
@@ -60,7 +58,9 @@ get_header(); ?>
 
 			// End the loop.
 			endwhile;
-        ?>
+
+			the_posts_navigation();
+			?>
 
             <table id="table">
                 <thead>
@@ -68,9 +68,11 @@ get_header(); ?>
                     <?php
                     $ths = '';
                     $ths .= '<th data-formatter="full_name_formatter">Name</th>';
-                    $ths .= get_th(bio::ALIAS, 'data-visible="false"');
+                    $ths .= get_th(bio::NAME, 'data-visible="false"');
+                    $ths .= get_th(bio::SURNAME, 'data-visible="false"');
                     $ths .= get_th(bio::CHRISTIAN_NAME, 'data-visible="false"');
                     $ths .= get_th(bio::MIDDLE_NAME, 'data-visible="false"');
+                    $ths .= get_th(bio::ALIAS, 'data-visible="false"');
                     $ths .= get_th(bio::BORN, 'data-visible="false"');
                     $ths .= get_th(bio::COUNTRY_OF_BIRTH);
                     $ths .= get_th(bio::NATIVE_OF, 'data-visible="false"');
@@ -88,25 +90,25 @@ get_header(); ?>
             </script>
 
 			<?php
-			// Previous/next page navigation.
-			the_posts_pagination( array(
-				'prev_text'          => __( 'Previous page', 'twentysixteen' ),
-				'next_text'          => __( 'Next page', 'twentysixteen' ),
-				'before_page_number' => '<span class="meta-nav screen-reader-text">' . __( 'Page', 'twentysixteen' ) . ' </span>',
-			) );
-
 		// If no content, include the "No posts found" template.
 		else :
+
 			get_template_part( 'template-parts/content', 'none' );
 
-		endif;
-		?>
+		endif; ?>
 
-		</main><!-- .site-main -->
-	</div><!-- .content-area -->
+        </main><!-- #main -->
+    </div><!-- #primary -->
 
 <?php get_sidebar(); ?>
-<?php get_footer(); ?>
+
+    </div><!-- .site-content-wrapper -->
+
+<?php
+get_sidebar( 'footer' );
+get_footer();
+?>
+
 <?php function get_th($field, $attributes = null){
     return '<th data-sortable="true" data-field="' . $field['id'] . '" ' . $attributes . '>' . $field['desc'] . '</th>';
 } ?>

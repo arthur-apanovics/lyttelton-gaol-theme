@@ -1,21 +1,21 @@
 /*
- Theme Name:   Lyttelton Gaol Child
- Theme URI:    http://example.com/twenty-fifteen-child/
+ Theme Name:   Lyttelton Gaol
+ Theme URI:    https://wordpress.com/theme/shoreditch
  Description:  Child theme for Lyttelton Gaol data
  Author:       likeminded.co.nz
  Author URI:   likeminded.co.nz
- Template:     twentysixteen
+ Template:     shoreditch
  Version:      1.0.0
  License:      GNU General Public License v2 or later
  License URI:  http://www.gnu.org/licenses/gpl-2.0.html
 */
 
+.archive-header {
+    margin-top: 6em;
+    margin-bottom: 4em;
+}
+
 div#gaol-search {
-    /*min-width: 320px;*/
-    /*max-width: 800px;*/
-    /*padding: 50px;*/
-    /*margin: 0 auto;*/
-    /*background: #fff;*/
     margin-bottom: 3em;
 }
 
@@ -97,6 +97,22 @@ li>div.value{
     float: right;
     font-weight: 500;
 }
+.convictions{
+    margin-top: 4em;
+}
 .profile-container {
     margin-top: 2em;
+}
+.profile-container ul {
+    margin: 0;
+}
+.gazette-container > .card .profile-container.conviction-gazette {
+    margin: 0;
+}
+
+.gazette-container > .card {
+    border-top: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    background-color: #fbfaf2;
 }
