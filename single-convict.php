@@ -7,14 +7,14 @@
  * @package Shoreditch
  */
 
-get_header(); ?>
+function no_sidebar_body_class($classes) {
+	$classes[] = 'no-sidebar';
+	return $classes;
+}
+add_filter('body_class', 'no_sidebar_body_class');
 
-<?php
-while ( have_posts() ) : the_post();
 
-	get_template_part( 'template-parts/content', 'convict' );
-
-endwhile; // End of the loop.
+get_header();
 ?>
 
     <div class="site-content-wrapper">
@@ -25,17 +25,12 @@ endwhile; // End of the loop.
 				<?php
 				while ( have_posts() ) : the_post();
 
-					get_template_part( 'template-parts/content', get_post_format() );
+					get_template_part( 'template-parts/content', 'convict' );
 
 					// If comments are open or we have at least one comment, load up the comment template.
 					if ( comments_open() || get_comments_number() ) {
 						comments_template();
 					}
-
-					the_post_navigation( array(
-						'next_text' => '<span class="meta-nav" aria-hidden="true">' . esc_html__( 'Next', 'shoreditch' ) . '</span> ' . '<span class="screen-reader-text">' . esc_html__( 'Next post:', 'shoreditch' ) . '</span> ' . '<span class="post-title">%title</span>',
-						'prev_text' => '<span class="meta-nav" aria-hidden="true">' . esc_html__( 'Previous', 'shoreditch' ) . '</span> ' . '<span class="screen-reader-text">' . esc_html__( 'Previous post:', 'shoreditch' ) . '</span> ' . '<span class="post-title">%title</span>',
-					) );
 
 				endwhile; // End of the loop.
 				?>
@@ -43,7 +38,7 @@ endwhile; // End of the loop.
             </main><!-- #main -->
         </div><!-- #primary -->
 
-		<?php get_sidebar(); ?>
+		<?php //get_sidebar(); ?>
 
     </div><!-- .site-content-wrapper -->
 

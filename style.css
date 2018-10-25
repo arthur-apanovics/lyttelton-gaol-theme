@@ -10,6 +10,10 @@
  License URI:  http://www.gnu.org/licenses/gpl-2.0.html
 */
 
+.archive-view {
+    width: 100%;
+}
+
 .archive-header {
     margin-top: 6em;
     margin-bottom: 4em;

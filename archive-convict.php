@@ -18,7 +18,7 @@ $search_by = get_query_var('search_by');
 
 <div class="site-content-wrapper">
 
-    <div id="primary" class="content-area">
+    <div id="primary" class="content-area archive-view">
         <main id="main" class="site-main" role="main">
 
 			<?php
@@ -100,7 +100,6 @@ $search_by = get_query_var('search_by');
         </main><!-- #main -->
     </div><!-- #primary -->
 
-<?php get_sidebar(); ?>
 
     </div><!-- .site-content-wrapper -->
 

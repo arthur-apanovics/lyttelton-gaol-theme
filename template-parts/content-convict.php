@@ -159,12 +159,9 @@ function get_formatted_entry($list_key , $list_value, $extra_class = null){
         ) );
         ?>
     </div><!-- .entry-content -->
-
-    <footer class="entry-footer">
-		<?php shoreditch_entry_footer(); ?>
-    </footer><!-- .entry-footer -->
-
-	<?php shoreditch_author_bio();	?>
+        <footer class="entry-footer">
+		    <?php shoreditch_entry_footer(); ?>
+        </footer><!-- .entry-footer -->
     </div><!-- .hentry-wrapper -->
 </article><!-- #post-## -->
 
