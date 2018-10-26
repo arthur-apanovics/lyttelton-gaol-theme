@@ -165,8 +165,3 @@ function get_formatted_entry($list_key , $list_value, $extra_class = null){
         </footer><!-- .entry-footer -->
     </div><!-- .hentry-wrapper -->
 </article><!-- #post-## -->
-
-<script>
-    // init tooltips
-    jQuery('[data-toggle="tooltip"]').tooltip();
-</script>

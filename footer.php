@@ -16,5 +16,10 @@
 
 <?php wp_footer(); ?>
 
+<script>
+    // init tooltips
+    jQuery('[data-toggle="tooltip"]').tooltip();
+</script>
+
 </body>
 </html>

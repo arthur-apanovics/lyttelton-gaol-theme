@@ -58,8 +58,6 @@ $search_by = get_query_var('search_by');
 
 			// End the loop.
 			endwhile;
-
-			the_posts_navigation();
 			?>
 
             <table id="table">
@@ -78,7 +76,9 @@ $search_by = get_query_var('search_by');
                     $ths .= get_th(bio::NATIVE_OF, 'data-visible="false"');
                     $ths .= get_th(bio::TRADE);
                     $ths .= get_th(bio::REMARKS, 'data-visible="false"');
-                    $ths .= '<th data-sortable="true" data-width="80px" data-align="right" data-field="total_convictions">Total</th>';
+                    $ths .= '<th data-sortable="true" data-width="60px" data-align="right" data-field="total_convictions">
+                                <i class="fa fa-gavel" style="border-bottom: 2px #dfdfdf dotted;;" data-toggle="tooltip" data-placement="top" title="Total number of convictions"></i>
+                            </th>';
                     echo $ths;
                     ?>
                 </tr>
