@@ -70,14 +70,15 @@ function get_formatted_entry($list_key , $list_value, $extra_class = null){
 				$output = start_container('Biographical');
 				$output .= get_formatted_entry(bio::NAME['desc'],             $meta_values[bio::NAME['id']]);
 				$output .= get_formatted_entry(bio::SURNAME['desc'],          $meta_values[bio::SURNAME['id']]);
-				$output .= get_formatted_entry(bio::CHRISTIAN_NAME['desc'],   $meta_values[bio::CHRISTIAN_NAME['id']]);
-				$output .= get_formatted_entry(bio::MIDDLE_NAME['desc'],      $meta_values[bio::MIDDLE_NAME['id']]);
+//				$output .= get_formatted_entry(bio::CHRISTIAN_NAME['desc'],   $meta_values[bio::CHRISTIAN_NAME['id']]);
+//				$output .= get_formatted_entry(bio::MIDDLE_NAME['desc'],      $meta_values[bio::MIDDLE_NAME['id']]);
 				$output .= get_formatted_entry(bio::ALIAS['desc'],            $meta_values[bio::ALIAS['id']]);
 				$output .= get_formatted_entry(bio::BORN['desc'],             $meta_values[bio::BORN['id']]);
 //				$output .= get_formatted_entry(bio::COUNTRY_OF_BIRTH['desc'], $meta_values[bio::COUNTRY_OF_BIRTH['id']]);
 //				$output .= get_formatted_entry(bio::NATIVE_OF['desc'],        $meta_values[bio::NATIVE_OF['id']]);
 
-				$where_from = $meta_values[bio::NATIVE_OF['id']] . ', ' . $meta_values[bio::COUNTRY_OF_BIRTH['id']];
+				$native_formatted = !empty($meta_values[bio::NATIVE_OF['id']]) ? $meta_values[bio::NATIVE_OF['id']] . ', ' : '';
+				$where_from = $native_formatted . $meta_values[bio::COUNTRY_OF_BIRTH['id']];
 				$output .= get_formatted_entry('Where Born',          $where_from);
 
 				$output .= get_formatted_entry(bio::TRADE['desc'],            $meta_values[bio::TRADE['id']]);
